@@ -1,0 +1,7 @@
+
+        [ckan.plugins]
+        # Add plugins here, e.g.
+        # myplugin=ckanext.nrrc.plugin:PluginClass
+        # NRRC UI plugin.
+	    nrrc_client=ckanext.nrrc.client.plugin:NRRCClient
+    

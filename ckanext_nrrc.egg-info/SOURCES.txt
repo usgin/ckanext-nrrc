@@ -1,0 +1,14 @@
+setup.py
+ckanext/__init__.py
+ckanext/nrrc/__init__.py
+ckanext/nrrc/client/__init__.py
+ckanext/nrrc/client/plugin.py
+ckanext/nrrc/client/controllers/__init__.py
+ckanext/nrrc/client/controllers/view.py
+ckanext_nrrc.egg-info/PKG-INFO
+ckanext_nrrc.egg-info/SOURCES.txt
+ckanext_nrrc.egg-info/dependency_links.txt
+ckanext_nrrc.egg-info/entry_points.txt
+ckanext_nrrc.egg-info/namespace_packages.txt
+ckanext_nrrc.egg-info/not-zip-safe
+ckanext_nrrc.egg-info/top_level.txt
