@@ -28,24 +28,24 @@ class NRRCClient(p.SingletonPlugin, tk.DefaultDatasetForm):
         p.toolkit.add_template_directory(config, 'templates')
         p.toolkit.add_public_directory(config, 'public')
 
+        config['search.facets'] = 'organization groups tags res_format custom_text4 custom_text5'
+        config['search.facets.custom_text4.title'] = 'Status'
+
     def get_helpers(self):
         return {}
-    """
+
     def before_map(self, map):
         controller = 'ckanext.nrrc.client.controllers.view:ViewController'
-        map.connect('map_search', '/map_search', controller=controller,
-                    action='render_map_search')
-        map.connect('library_search', '/library_search', controller=controller,
-                    action='render_library_search')
-        map.connect('resources', '/resources', controller=controller,
-                    action='render_resources')
-        map.connect('contribute', '/contribute', controller=controller,
-                    action='render_contribute')
+        map.connect('notifications', 'organization/notifications', controller=controller, action='render_notifications')
+        map.connect('documents', 'organization/documents', controller=controller, action='render_documents')
+        map.connect('map_search', '/map_search', controller=controller, action='render_map_search')
+        map.connect('library_search', '/library_search', controller=controller, action='render_library_search')
+        map.connect('resources', '/resources', controller=controller, action='render_resources')
+        map.connect('contribute', '/contribute', controller=controller, action='render_contribute')
         return map
 
-    def after_map(self, map):
-        return
-    """
+    #def after_map(self, map):
+     #   return
 
     def _modify_package_schema(self, schema):
         schema.update({
@@ -53,11 +53,11 @@ class NRRCClient(p.SingletonPlugin, tk.DefaultDatasetForm):
                             tk.get_converter('convert_to_extras')],
             'custom_text2': [tk.get_validator('ignore_missing'),
                             tk.get_converter('convert_to_extras')],
-            'custom_text3': [tk.get_validator('ignore_missing'),
+            'custom_text3': [tk.get_validator('isodate'),
                             tk.get_converter('convert_to_extras')],
             'custom_text4': [tk.get_validator('ignore_missing'),
                             tk.get_converter('convert_to_extras')],
-            'custom_text5': [tk.get_validator('ignore_missing'),
+            'custom_text5': [tk.get_validator('isodate'),
                             tk.get_converter('convert_to_extras')],
             'custom_text6': [tk.get_validator('ignore_missing'),
                             tk.get_converter('convert_to_extras')],

@@ -1,16 +1,16 @@
 {% ckan_extends %}
 
 {% block package_basic_fields_custom %}
-  {{ form.input('custom_text1', label=_('Id/No'), id='field-custom_text1', placeholder=_('Federal Id/Project No./NEPA Log No./Case No.'), value=data.custom_text1, error=errors.custom_text1, classes=['control-medium']) }}
-  {{ form.input('custom_text2', label=_('Sponsoring Federal Agency(s)'), id='field-custom_text2', placeholder=_('eg. Department of Agriculture'), value=data.custom_text2, error=errors.custom_text2, classes=['control-medium']) }}
-  {{ form.input('custom_text3', label=_('Posting Date'), id='field-custom_text3', placeholder=_('eg. 2014-07-23'), value=data.custom_text3, error=errors.custom_text3, classes=['control-medium']) }}
-  {{ form.input('custom_text4', label=_('Current Status'), id='field-custom_text4', placeholder=_('eg. Active'), value=data.custom_text4, error=errors.custom_text4, classes=['control-medium']) }}
-  {{ form.input('custom_text5', label=_('Deadline for Response/Action'), id='field-custom_text5', placeholder=_('eg. 2014-07-23'), value=data.custom_text5, error=errors.custom_text5, classes=['control-medium']) }}
-  {{ form.input('custom_text6', label=_('Governor\'s (State) Action/Comments'), id='field-custom_text6', placeholder=_(''), value=data.custom_text6, error=errors.custom_text6, classes=['control-medium']) }}
-  {{ form.input('custom_text7', label=_('NRRC Council Decision(s)'), id='field-custom_text7', placeholder=_(''), value=data.custom_text7, error=errors.custom_text7, classes=['control-medium']) }}
-  {{ form.input('custom_text8', label=_('Inter-agency Review Team (IRT)'), id='field-custom_text8', placeholder=_('Review Checklist – biological, legal, designate lead agency'), value=data.custom_text8, error=errors.custom_text8, classes=['control-medium']) }}
-  {{ form.input('custom_text9', label=_('Proposed Action Abstract/Pertinent URL(s)'), id='field-custom_text9', placeholder=_(''), value=data.custom_text9, error=errors.custom_text9, classes=['control-medium']) }}
-  {{ form.input('custom_text10', label=_('State Agency(s) Resources/Data & Response(s)'), id='field-custom_text10', placeholder=_(''), value=data.custom_text10, error=errors.custom_text10, classes=['control-medium']) }}
-  {{ form.input('custom_text11', label=_('Counties Impacted Resources/Data & Responses(s)'), id='field-custom_text11', placeholder=_(''), value=data.custom_text11, error=errors.custom_text11, classes=['control-medium']) }}
-  {{ form.input('custom_text12', label=_('Type of Resonse/Resources Required'), id='field-custom_text12', placeholder=_('eg. biologist, legal appeal, comments, letter'), value=data.custom_text12, error=errors.custom_text12, classes=['control-medium']) }}
+  {{ form.input('custom_text1', label=_('Id/No'), id='field-custom_text1', placeholder=_('Federal Id/Project No./NEPA Log No./Case No.'), value=data.custom_text1, error=errors.custom_text1, classes=['control-full']) }}
+  {{ form.markdown('custom_text2', label=_('Sponsoring Federal Agency(s)'), id='field-custom_text2', placeholder=_('eg. Department of Agriculture'), value=data.custom_text2, error=errors.custom_text2) }}
+  {{ form.input('custom_text3', label=_('Posting Date'), id='field-custom_text3', placeholder=_('eg. 2014-07-23'), value=data.custom_text3, error=errors.custom_text3, classes=['control-full']) }}
+  {{ form.input('custom_text4', label=_('Current Status'), id='field-custom_text4', placeholder=_('eg. Active'), value=data.custom_text4, error=errors.custom_text4, classes=['control-full']) }}
+  {{ form.input('custom_text5', label=_('Deadline for Response / Action'), id='field-custom_text5', placeholder=_('eg. 2014-07-23'), value=data.custom_text5, error=errors.custom_text5, classes=['control-full']) }}
+  {{ form.markdown('custom_text6', label=_('Governor\'s (State) Action / Comments'), id='field-custom_text6', placeholder=_(''), value=data.custom_text6, error=errors.custom_text6) }}
+  {{ form.markdown('custom_text7', label=_('NRRC Council Decision(s)'), id='field-custom_text7', placeholder=_(''), value=data.custom_text7, error=errors.custom_text7) }}
+  {{ form.markdown('custom_text8', label=_('Inter-agency Review Team (IRT)'), id='field-custom_text8', placeholder=_('Review Checklist – biological, legal, designate lead agency'), value=data.custom_text8, error=errors.custom_text8) }}
+  {{ form.markdown('custom_text9', label=_('Proposed Action Abstract / Pertinent URL(s)'), id='field-custom_text9', placeholder=_(''), value=data.custom_text9, error=errors.custom_text9) }}
+  {{ form.markdown('custom_text10', label=_('State Agency(s) Resources / Data & Response(s)'), id='field-custom_text10', placeholder=_(''), value=data.custom_text10, error=errors.custom_text10) }}
+  {{ form.markdown('custom_text11', label=_('Counties Impacted Resources / Data & Responses(s)'), id='field-custom_text11', placeholder=_(''), value=data.custom_text11, error=errors.custom_text11) }}
+  {{ form.markdown('custom_text12', label=_('Type of Resonse / Resources Required'), id='field-custom_text12', placeholder=_('eg. biologist, legal appeal, comments, letter'), value=data.custom_text12, error=errors.custom_text12) }}
 {% endblock %}

@@ -1,52 +1,76 @@
 {% ckan_extends %}
 
 {% block extras %}
+		{% if pkg_dict.custom_text1 %}
     <tr>
       <th scope="row" class="dataset-label">{{ _("Id/No") }}</th>
       <td class="dataset-details">{{ pkg_dict.custom_text1 }}</td>
     </tr>
+		{% endif %}
+		{% if pkg_dict.custom_text2 %}
     <tr>
       <th scope="row" class="dataset-label">{{ _("Sponsoring Federal Agency(s)") }}</th>
       <td class="dataset-details">{{ pkg_dict.custom_text2 }}</td>
     </tr>
+		{% endif %}
+		{% if pkg_dict.custom_text3 %}
     <tr>
       <th scope="row" class="dataset-label">{{ _("Posting Date") }}</th>
-      <td class="dataset-details">{{ pkg_dict.custom_text3 }}</td>
+      <td class="dataset-details">{{ (pkg_dict.custom_text3.date }}</td>
     </tr>
+		{% endif %}
+		{% if pkg_dict.custom_text4 %}
     <tr>
       <th scope="row" class="dataset-label">{{ _("Current Status") }}</th>
       <td class="dataset-details">{{ pkg_dict.custom_text4 }}</td>
     </tr>
+		{% endif %}
+		{% if pkg_dict.custom_text5 %}
     <tr>
       <th scope="row" class="dataset-label">{{ _("Deadline for Response/Action") }}</th>
       <td class="dataset-details">{{ pkg_dict.custom_text5 }}</td>
     </tr>
+		{% endif %}
+		{% if pkg_dict.custom_text6 %}
     <tr>
       <th scope="row" class="dataset-label">{{ _("Governor\'s (State) Action/Comments") }}</th>
       <td class="dataset-details">{{ pkg_dict.custom_text6 }}</td>
     </tr>
+		{% endif %}
+		{% if pkg_dict.custom_text7 %}
     <tr>
       <th scope="row" class="dataset-label">{{ _("NRRC Council Decision(s)") }}</th>
       <td class="dataset-details">{{ pkg_dict.custom_text7 }}</td>
     </tr>
+		{% endif %}
+		{% if pkg_dict.custom_text8 %}
     <tr>
       <th scope="row" class="dataset-label">{{ _("Inter-agency Review Team (IRT)") }}</th>
       <td class="dataset-details">{{ pkg_dict.custom_text8 }}</td>
     </tr>
+		{% endif %}
+		{% if pkg_dict.custom_text9 %}
     <tr>
       <th scope="row" class="dataset-label">{{ _("Proposed Action Abstract/Pertinent URL(s)") }}</th>
       <td class="dataset-details">{{ pkg_dict.custom_text9 }}</td>
     </tr>
+		{% endif %}
+		{% if pkg_dict.custom_text10 %}
     <tr>
       <th scope="row" class="dataset-label">{{ _("State Agency(s) Resources/Data & Response(s)") }}</th>
       <td class="dataset-details">{{ pkg_dict.custom_text10 }}</td>
     </tr>
+		{% endif %}
+		{% if pkg_dict.custom_text11 %}
     <tr>
       <th scope="row" class="dataset-label">{{ _("Counties Impacted Resources/Data & Responses(s)") }}</th>
       <td class="dataset-details">{{ pkg_dict.custom_text11 }}</td>
     </tr>
+		{% endif %}
+		{% if pkg_dict.custom_text2 %}
     <tr>
       <th scope="row" class="dataset-label">{{ _("Type of Resonse/Resources Required") }}</th>
       <td class="dataset-details">{{ pkg_dict.custom_text12 }}</td>
     </tr>
+		{% endif %}
 {% endblock %}
