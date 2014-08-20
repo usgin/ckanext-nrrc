@@ -10,13 +10,11 @@ class NRRCClient(p.SingletonPlugin, tk.DefaultDatasetForm):
     p.implements(p.ITemplateHelpers, inherit=True)
     p.implements(p.IRoutes, inherit=True)
     p.implements(p.IDatasetForm)
-   # p.implements(p.IPackageController, inherit=True)
     p.implements(p.IFacets, inherit=True)
 
     """
     p.implements(p.IActions)
     p.implements(p.IAuthFunctions)
-    p.implements(p.IFacets)
     p.implements(p.IPackageController)
     p.implements(p.IDatasetForm)
     """
