@@ -1,6 +1,7 @@
 import ckan.plugins as p
 import ckan.plugins.toolkit as tk
 import ckan.model as model
+from ckan.common import OrderedDict, _
 
 class NRRCClient(p.SingletonPlugin, tk.DefaultDatasetForm):
 
@@ -9,6 +10,8 @@ class NRRCClient(p.SingletonPlugin, tk.DefaultDatasetForm):
     p.implements(p.ITemplateHelpers, inherit=True)
     p.implements(p.IRoutes, inherit=True)
     p.implements(p.IDatasetForm)
+   # p.implements(p.IPackageController, inherit=True)
+    p.implements(p.IFacets, inherit=True)
 
     """
     p.implements(p.IActions)
@@ -28,8 +31,29 @@ class NRRCClient(p.SingletonPlugin, tk.DefaultDatasetForm):
         p.toolkit.add_template_directory(config, 'templates')
         p.toolkit.add_public_directory(config, 'public')
 
-        config['search.facets'] = 'organization groups tags res_format custom_text4 custom_text5'
-        config['search.facets.custom_text4.title'] = 'Status'
+    def dataset_facets(self, facets_dict, organization_type, package_type):
+        facets_dict = OrderedDict()
+        facets_dict['groups'] = _('Groups')
+        facets_dict['tags'] = _('Tags')
+        facets_dict['custom_text4'] = _('Statuses')
+        facets_dict['custom_text5'] = _('Deadlines')
+        return facets_dict
+
+    def group_facets(self, facets_dict, organization_type, package_type):
+        facets_dict = OrderedDict()
+        facets_dict['groups'] = _('Groups')
+        facets_dict['tags'] = _('Tags')
+        facets_dict['custom_text4'] = _('Statuses')
+        facets_dict['custom_text5'] = _('Deadlines')
+        return facets_dict
+
+    def organization_facets(self, facets_dict, organization_type, package_type):
+        facets_dict = OrderedDict()
+        facets_dict['groups'] = _('Groups')
+        facets_dict['tags'] = _('Tags')
+        facets_dict['custom_text4'] = _('Statuses')
+        facets_dict['custom_text5'] = _('Deadlines')
+        return facets_dict
 
     def get_helpers(self):
         return {}
