@@ -29,8 +29,9 @@ class NRRCClient(p.SingletonPlugin, tk.DefaultDatasetForm):
         p.toolkit.add_template_directory(config, 'templates')
         p.toolkit.add_public_directory(config, 'public')
 
-    def dataset_facets(self, facets_dict, organization_type, package_type):
+    def dataset_facets(self, facets_dict, package_type):
         facets_dict = OrderedDict()
+        facets_dict['organization'] = _('Organizations')
         facets_dict['groups'] = _('Groups')
         facets_dict['tags'] = _('Tags')
         facets_dict['custom_text4'] = _('Statuses')
@@ -39,7 +40,6 @@ class NRRCClient(p.SingletonPlugin, tk.DefaultDatasetForm):
 
     def group_facets(self, facets_dict, organization_type, package_type):
         facets_dict = OrderedDict()
-        facets_dict['groups'] = _('Groups')
         facets_dict['tags'] = _('Tags')
         facets_dict['custom_text4'] = _('Statuses')
         facets_dict['custom_text5'] = _('Deadlines')
