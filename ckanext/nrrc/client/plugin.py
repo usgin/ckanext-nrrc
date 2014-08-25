@@ -64,6 +64,7 @@ class NRRCClient(p.SingletonPlugin, tk.DefaultDatasetForm):
         map.connect('library_search', '/library_search', controller=controller, action='render_library_search')
         map.connect('resources', '/resources', controller=controller, action='render_resources')
         map.connect('contribute', '/contribute', controller=controller, action='render_contribute')
+        map.connect('harvest', '/harvest_nrrc', controller=controller, action='render_harvest')
         return map
 
     #def after_map(self, map):

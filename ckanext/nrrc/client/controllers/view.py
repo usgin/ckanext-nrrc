@@ -2,7 +2,7 @@ import ckan.plugins as p
 from ckan import model
 import ckan.lib.base as base
 import ckan.lib.helpers as h
-from ckan.lib.base import BaseController, abort, response, render
+from ckan.lib.base import BaseController, abort, response, render, redirect
 from pylons.i18n import _
 
 class ViewController(BaseController):
@@ -28,3 +28,6 @@ class ViewController(BaseController):
 
     def render_contribute(self):
         pass
+
+    def render_harvest(self):
+        redirect('/harvest')
