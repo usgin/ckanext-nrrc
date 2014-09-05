@@ -95,7 +95,25 @@ class NRRCClient(p.SingletonPlugin, tk.DefaultDatasetForm):
             'custom_text11': [tk.get_validator('ignore_missing'),
                             tk.get_converter('convert_to_extras')],
             'custom_text12': [tk.get_validator('ignore_missing'),
-                            tk.get_converter('convert_to_extras')]
+                            tk.get_converter('convert_to_extras')],
+            'agr': [tk.get_validator('ignore_missing'),
+                tk.get_converter('convert_to_extras')],
+            'adot': [tk.get_validator('ignore_missing'),
+                tk.get_converter('convert_to_extras')],
+            'water': [tk.get_validator('ignore_missing'),
+                tk.get_converter('convert_to_extras')],
+            'gamefish': [tk.get_validator('ignore_missing'),
+                tk.get_converter('convert_to_extras')],
+            'land': [tk.get_validator('ignore_missing'),
+                tk.get_converter('convert_to_extras')],
+            'azgs': [tk.get_validator('ignore_missing'),
+                tk.get_converter('convert_to_extras')],
+            'forestry': [tk.get_validator('ignore_missing'),
+                tk.get_converter('convert_to_extras')],
+            'parks': [tk.get_validator('ignore_missing'),
+                tk.get_converter('convert_to_extras')],
+            'adeq': [tk.get_validator('ignore_missing'),
+                tk.get_converter('convert_to_extras')]
         })
         return schema
 
@@ -135,7 +153,25 @@ class NRRCClient(p.SingletonPlugin, tk.DefaultDatasetForm):
             'custom_text11': [tk.get_converter('convert_from_extras'),
                             tk.get_validator('ignore_missing')],
             'custom_text12': [tk.get_converter('convert_from_extras'),
-                            tk.get_validator('ignore_missing')]
+                            tk.get_validator('ignore_missing')],
+            'agr': [tk.get_converter('convert_from_extras'),
+                    tk.get_validator('ignore_missing')],
+            'adot': [tk.get_validator('ignore_missing'),
+                tk.get_converter('convert_from_extras')],
+            'water': [tk.get_validator('ignore_missing'),
+                tk.get_converter('convert_from_extras')],
+            'gamefish': [tk.get_validator('ignore_missing'),
+                tk.get_converter('convert_from_extras')],
+            'land': [tk.get_validator('ignore_missing'),
+                tk.get_converter('convert_from_extras')],
+            'azgs': [tk.get_validator('ignore_missing'),
+                tk.get_converter('convert_from_extras')],
+            'forestry': [tk.get_validator('ignore_missing'),
+                tk.get_converter('convert_from_extras')],
+            'parks': [tk.get_validator('ignore_missing'),
+                tk.get_converter('convert_from_extras')],
+            'adeq': [tk.get_validator('ignore_missing'),
+                tk.get_converter('convert_from_extras')]
         })
         return schema
 

@@ -1,16 +1,111 @@
-{% ckan_extends %}
+{% import 'macros/form.html' as form %}
 
-{% block package_basic_fields_custom %}
-  {{ form.input('custom_text1', label=_('Id/No'), id='field-custom_text1', placeholder=_('Federal Id/Project No./NEPA Log No./Case No.'), value=data.custom_text1, error=errors.custom_text1, classes=['control-full']) }}
-  {{ form.markdown('custom_text2', label=_('Sponsoring Federal Agency(s)'), id='field-custom_text2', placeholder=_('eg. Department of Agriculture'), value=data.custom_text2, error=errors.custom_text2) }}
-  {{ form.input('custom_text3', label=_('Posting Date'), id='field-custom_text3', placeholder=_('eg. 2014-07-23'), value=data.custom_text3, error=errors.custom_text3, classes=['control-full']) }}
-  {{ form.input('custom_text4', label=_('Current Status'), id='field-custom_text4', placeholder=_('eg. Active'), value=data.custom_text4, error=errors.custom_text4, classes=['control-full']) }}
-  {{ form.input('custom_text5', label=_('Deadline for Response / Action'), id='field-custom_text5', placeholder=_('eg. 2014-07-23'), value=data.custom_text5, error=errors.custom_text5, classes=['control-full']) }}
-  {{ form.markdown('custom_text6', label=_('Governor\'s (State) Action / Comments'), id='field-custom_text6', placeholder=_(''), value=data.custom_text6, error=errors.custom_text6) }}
-  {{ form.markdown('custom_text7', label=_('NRRC Council Decision(s)'), id='field-custom_text7', placeholder=_(''), value=data.custom_text7, error=errors.custom_text7) }}
-  {{ form.markdown('custom_text8', label=_('Inter-agency Review Team (IRT)'), id='field-custom_text8', placeholder=_('Review Checklist – biological, legal, designate lead agency'), value=data.custom_text8, error=errors.custom_text8) }}
-  {{ form.markdown('custom_text9', label=_('Proposed Action Abstract / Pertinent URL(s)'), id='field-custom_text9', placeholder=_(''), value=data.custom_text9, error=errors.custom_text9) }}
-  {{ form.markdown('custom_text10', label=_('State Agency(s) Resources / Data & Response(s)'), id='field-custom_text10', placeholder=_(''), value=data.custom_text10, error=errors.custom_text10) }}
-  {{ form.markdown('custom_text11', label=_('Counties Impacted Resources / Data & Responses(s)'), id='field-custom_text11', placeholder=_(''), value=data.custom_text11, error=errors.custom_text11) }}
-  {{ form.markdown('custom_text12', label=_('Type of Resonse / Resources Required'), id='field-custom_text12', placeholder=_('eg. biologist, legal appeal, comments, letter'), value=data.custom_text12, error=errors.custom_text12) }}
+{% block package_basic_fields_title %}
+  {{ form.input('title', id='field-title', label=_('Title'), placeholder=_('Title of Proposed Action'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target'}) }}
+{% endblock %}
+
+{% block package_basic_fields_url %}
+  {% set prefix = h.url_for(controller='package', action='read', id='') %}
+  {% set domain = h.url_for(controller='package', action='read', id='', qualified=true) %}
+  {% set domain = domain|replace("http://", "")|replace("https://", "") %}
+  {% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain, 'data-module-placeholder': '<dataset>'} %}
+
+  {{ form.prepend('name', id='field-name', label=_('URL'), prepend=prefix, placeholder=_('eg. my-dataset'), value=data.name, error=errors.name, attrs=attrs, is_required=true) }}
+{% endblock %}
+
+{% block package_basic_fields_description %}
+  {{ form.markdown('notes', id='field-notes', label=_('Proposed Action Abstract / Pertinent URL(s)'), placeholder=_('Description of Proposed Action'), value=data.notes, error=errors.notes) }}
+{% endblock %}
+
+{% block package_basic_fields_tags %}
+  {% set tag_attrs = {'data-module': 'autocomplete', 'data-module-tags': '', 'data-module-source': '/api/2/util/tag/autocomplete?incomplete=?'} %}
+  {{ form.input('tag_string', id='field-tags', label=_('Tags'), placeholder=_('eg. economy, mental health, government'), value=data.tag_string, error=errors.tags, classes=['control-full'], attrs=tag_attrs) }}
+{% endblock %}
+
+{% block package_basic_fields_org %}
+  {# if we have a default group then this wants remembering #}
+  {% if data.group_id %}
+    <input type="hidden" name="groups__0__id" value="{{ data.group_id }}" />
+  {% endif %}
+
+  {% set dataset_is_draft = data.get('state', 'draft').startswith('draft') or data.get('state', 'none') ==  'none' %}
+  {% set dataset_has_organization = data.owner_org or data.group_id %}
+  {% set organizations_available = h.organizations_available('create_dataset') %}
+  {% set user_is_sysadmin = h.check_access('sysadmin') %}
+  {% set show_organizations_selector = organizations_available and (user_is_sysadmin or dataset_is_draft) %}
+  {% set show_visibility_selector = dataset_has_organization or (organizations_available and (user_is_sysadmin or dataset_is_draft)) %}
+
+  {% if show_organizations_selector and show_visibility_selector %}
+    <div data-module="dataset-visibility">
+  {% endif %}
+
+  {% if show_organizations_selector %}
+    {% set existing_org = data.owner_org or data.group_id %}
+    <div class="control-group">
+      <label for="field-organizations" class="control-label">{{ _('Organization') }}</label>
+      <div class="controls">
+        <select id="field-organizations" name="owner_org" data-module="autocomplete">
+          {% if h.check_config_permission('create_unowned_dataset') %}
+             <option value="" {% if not selected_org and data.id %} selected="selected" {% endif %}>{{ _('No organization') }}</option>
+          {% endif %}
+          {% for organization in organizations_available %}
+            {# get out first org from users list only if there is not an existing org #}
+            {% set selected_org = (existing_org and existing_org == organization.id) or (not existing_org and not data.id and organization.id == organizations_available[0].id) %}
+            <option value="{{ organization.id }}" {% if selected_org %} selected="selected" {% endif %}>{{ organization.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+  {% endif %}
+
+  {% if show_visibility_selector %}
+    {% block package_metadata_fields_visibility %}
+      <div class="control-group">
+        <label for="field-private" class="control-label">{{ _('Visibility') }}</label>
+        <div class="controls">
+          <select id="field-private" name="private">
+            {% for option in [('True', _('Private')), ('False', _('Public'))] %}
+            <option value="{{ option[0] }}" {% if option[0] == data.private|trim %}selected="selected"{% endif %}>{{ option[1] }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    {% endblock %}
+  {% endif %}
+
+  {% if show_organizations_selector and show_visibility_selector %}
+    </div>
+  {% endif %}
+
+	{% block package_basic_fields_custom %}
+		{{ form.input('custom_text1', label=_('Id/No'), id='field-custom_text1', placeholder=_('Federal Id/Project No./NEPA Log No./Case No.'), value=data.custom_text1, error=errors.custom_text1, classes=['control-full']) }}
+		{{ form.markdown('custom_text2', label=_('Sponsoring Federal Agency(s)'), id='field-custom_text2', placeholder=_('eg. Department of Agriculture'), value=data.custom_text2, error=errors.custom_text2) }}
+		{{ form.input('custom_text3', label=_('Posting Date'), id='field-custom_text3', placeholder=_('eg. 2014-07-23'), value=data.custom_text3, error=errors.custom_text3, classes=['control-full']) }}
+		{{ form.input('custom_text4', label=_('Current Status'), id='field-custom_text4', placeholder=_('eg. Active'), value=data.custom_text4, error=errors.custom_text4, classes=['control-full']) }}
+		{{ form.input('custom_text5', label=_('Deadline for Response / Action'), id='field-custom_text5', placeholder=_('eg. 2014-07-23'), value=data.custom_text5, error=errors.custom_text5, classes=['control-full']) }}
+		{{ form.markdown('custom_text12', label=_('Type of Resonse / Resources Required'), id='field-custom_text12', placeholder=_('eg. biologist, legal appeal, comments, letter'), value=data.custom_text12, error=errors.custom_text12) }}
+		<b>Applicable Agencies:</b>
+		{{ form.checkbox('agr', label=_('Department of Agriculture'), value='True') }}
+		{{ form.checkbox('adot', label=_('Department of Transportation'), value='True') }}
+		{{ form.checkbox('water', label=_('Department of Water Resources'), value='True') }}
+		{{ form.checkbox('gamefish', label=_('Game and Fish Department'), value='True') }}
+		{{ form.checkbox('land', label=_('State Land Department'), value='True') }}
+		{{ form.checkbox('azgs', label=_('Geological Survey'), value='True') }}
+		{{ form.checkbox('forestry', label=_('State Forestry Division'), value='True') }}
+		{{ form.checkbox('parks', label=_('State Parks'), value='True') }}
+		{{ form.checkbox('adeq', label=_('Department of Environment Quality'), value='True') }}
+	{% endblock %}
+
+  {% if data.id and h.check_access('package_delete', {'id': data.id}) and data.state != 'active' %}
+    <div class="control-group">
+      <label for="field-state" class="control-label">{{ _('State') }}</label>
+      <div class="controls">
+        <select id="field-state" name="state">
+          <option value="active" {% if data.get('state', 'none') == 'active' %} selected="selected" {% endif %}>{{ _('Active') }}</option>
+          <option value="deleted" {% if data.get('state', 'none') == 'deleted' %} selected="selected" {% endif %}>{{ _('Deleted') }}</option>
+        </select>
+      </div>
+    </div>
+  {% endif %}
+
 {% endblock %}
