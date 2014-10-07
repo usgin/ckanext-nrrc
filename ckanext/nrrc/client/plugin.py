@@ -31,26 +31,9 @@ class NRRCClient(p.SingletonPlugin, tk.DefaultDatasetForm):
 
     def dataset_facets(self, facets_dict, package_type):
         facets_dict = OrderedDict()
-        facets_dict['organization'] = _('Organizations')
-        facets_dict['groups'] = _('Groups')
+        #facets_dict['organization'] = _('Organizations')
+        #facets_dict['groups'] = _('Groups')
         facets_dict['tags'] = _('Tags')
-        facets_dict['custom_text4'] = _('Statuses')
-        facets_dict['custom_text5'] = _('Deadlines')
-        return facets_dict
-
-    def group_facets(self, facets_dict, organization_type, package_type):
-        facets_dict = OrderedDict()
-        facets_dict['tags'] = _('Tags')
-        facets_dict['custom_text4'] = _('Statuses')
-        facets_dict['custom_text5'] = _('Deadlines')
-        return facets_dict
-
-    def organization_facets(self, facets_dict, organization_type, package_type):
-        facets_dict = OrderedDict()
-        facets_dict['groups'] = _('Groups')
-        facets_dict['tags'] = _('Tags')
-        facets_dict['custom_text4'] = _('Statuses')
-        facets_dict['custom_text5'] = _('Deadlines')
         return facets_dict
 
     def get_helpers(self):
@@ -58,122 +41,8 @@ class NRRCClient(p.SingletonPlugin, tk.DefaultDatasetForm):
 
     def before_map(self, map):
         controller = 'ckanext.nrrc.client.controllers.view:ViewController'
-        map.connect('notifications', 'organization/notifications', controller=controller, action='render_notifications')
-        map.connect('documents', 'organization/documents', controller=controller, action='render_documents')
-        map.connect('map_search', '/map_search', controller=controller, action='render_map_search')
-        map.connect('library_search', '/library_search', controller=controller, action='render_library_search')
-        map.connect('resources', '/resources', controller=controller, action='render_resources')
-        map.connect('contribute', '/contribute', controller=controller, action='render_contribute')
         map.connect('harvest', '/harvest_nrrc', controller=controller, action='render_harvest')
         return map
-
-    #def after_map(self, map):
-     #   return
-
-    def _modify_package_schema(self, schema):
-        schema.update({
-            'custom_text1': [tk.get_validator('ignore_missing'),
-                            tk.get_converter('convert_to_extras')],
-            'custom_text2': [tk.get_validator('ignore_missing'),
-                            tk.get_converter('convert_to_extras')],
-            'custom_text3': [tk.get_validator('ignore_missing'),
-                            tk.get_converter('convert_to_extras')],
-            'custom_text4': [tk.get_validator('ignore_missing'),
-                            tk.get_converter('convert_to_extras')],
-            'custom_text5': [tk.get_validator('ignore_missing'),
-                            tk.get_converter('convert_to_extras')],
-            'custom_text6': [tk.get_validator('ignore_missing'),
-                            tk.get_converter('convert_to_extras')],
-            'custom_text7': [tk.get_validator('ignore_missing'),
-                            tk.get_converter('convert_to_extras')],
-            'custom_text8': [tk.get_validator('ignore_missing'),
-                            tk.get_converter('convert_to_extras')],
-            'custom_text9': [tk.get_validator('ignore_missing'),
-                            tk.get_converter('convert_to_extras')],
-            'custom_text10': [tk.get_validator('ignore_missing'),
-                            tk.get_converter('convert_to_extras')],
-            'custom_text11': [tk.get_validator('ignore_missing'),
-                            tk.get_converter('convert_to_extras')],
-            'custom_text12': [tk.get_validator('ignore_missing'),
-                            tk.get_converter('convert_to_extras')],
-            'agr': [tk.get_validator('ignore_missing'),
-                tk.get_converter('convert_to_extras')],
-            'adot': [tk.get_validator('ignore_missing'),
-                tk.get_converter('convert_to_extras')],
-            'water': [tk.get_validator('ignore_missing'),
-                tk.get_converter('convert_to_extras')],
-            'gamefish': [tk.get_validator('ignore_missing'),
-                tk.get_converter('convert_to_extras')],
-            'land': [tk.get_validator('ignore_missing'),
-                tk.get_converter('convert_to_extras')],
-            'azgs': [tk.get_validator('ignore_missing'),
-                tk.get_converter('convert_to_extras')],
-            'forestry': [tk.get_validator('ignore_missing'),
-                tk.get_converter('convert_to_extras')],
-            'parks': [tk.get_validator('ignore_missing'),
-                tk.get_converter('convert_to_extras')],
-            'adeq': [tk.get_validator('ignore_missing'),
-                tk.get_converter('convert_to_extras')]
-        })
-        return schema
-
-    def create_package_schema(self):
-        schema = super(NRRCClient, self).create_package_schema()
-        schema = self._modify_package_schema(schema)
-        return schema
-
-    def update_package_schema(self):
-        schema = super(NRRCClient, self).update_package_schema()
-        schema = self._modify_package_schema(schema)
-        return schema
-
-    def show_package_schema(self):
-        schema = super(NRRCClient, self).show_package_schema()
-        schema.update({
-            'custom_text1': [tk.get_converter('convert_from_extras'),
-                            tk.get_validator('ignore_missing')],
-            'custom_text2': [tk.get_converter('convert_from_extras'),
-                            tk.get_validator('ignore_missing')],
-            'custom_text3': [tk.get_converter('convert_from_extras'),
-                            tk.get_validator('ignore_missing')],
-            'custom_text4': [tk.get_converter('convert_from_extras'),
-                            tk.get_validator('ignore_missing')],
-            'custom_text5': [tk.get_converter('convert_from_extras'),
-                            tk.get_validator('ignore_missing')],
-            'custom_text6': [tk.get_converter('convert_from_extras'),
-                            tk.get_validator('ignore_missing')],
-            'custom_text7': [tk.get_converter('convert_from_extras'),
-                            tk.get_validator('ignore_missing')],
-            'custom_text8': [tk.get_converter('convert_from_extras'),
-                            tk.get_validator('ignore_missing')],
-            'custom_text9': [tk.get_converter('convert_from_extras'),
-                            tk.get_validator('ignore_missing')],
-            'custom_text10': [tk.get_converter('convert_from_extras'),
-                            tk.get_validator('ignore_missing')],
-            'custom_text11': [tk.get_converter('convert_from_extras'),
-                            tk.get_validator('ignore_missing')],
-            'custom_text12': [tk.get_converter('convert_from_extras'),
-                            tk.get_validator('ignore_missing')],
-            'agr': [tk.get_converter('convert_from_extras'),
-                    tk.get_validator('ignore_missing')],
-            'adot': [tk.get_validator('ignore_missing'),
-                tk.get_converter('convert_from_extras')],
-            'water': [tk.get_validator('ignore_missing'),
-                tk.get_converter('convert_from_extras')],
-            'gamefish': [tk.get_validator('ignore_missing'),
-                tk.get_converter('convert_from_extras')],
-            'land': [tk.get_validator('ignore_missing'),
-                tk.get_converter('convert_from_extras')],
-            'azgs': [tk.get_validator('ignore_missing'),
-                tk.get_converter('convert_from_extras')],
-            'forestry': [tk.get_validator('ignore_missing'),
-                tk.get_converter('convert_from_extras')],
-            'parks': [tk.get_validator('ignore_missing'),
-                tk.get_converter('convert_from_extras')],
-            'adeq': [tk.get_validator('ignore_missing'),
-                tk.get_converter('convert_from_extras')]
-        })
-        return schema
 
     def is_fallback(self):
         return True

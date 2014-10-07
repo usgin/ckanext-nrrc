@@ -7,9 +7,8 @@
         {% endblock %}
       </div>
       <div class="span6 col2">
-        {% block promoted %}
-          {% snippet 'home/snippets/promoted.html' %}
-        {% endblock %}
+				{% snippet 'home/snippets/search.html' %}
+        {% snippet 'home/snippets/stats.html' %}
       </div>
     </div>
   </div>
@@ -18,17 +17,12 @@
   <div class="container">
     <div class="row row2">
       <div class="span6 col1">
-				{% set organizations = h.get_featured_organizations(count=2) %}
-					<div class="box">
-						{% snippet 'snippets/organization_item_home.html', organization=organizations[0], truncate=50, truncate_title=35 %}
-					</div>
+        {% block promoted %}
+          {% snippet 'home/snippets/promoted.html' %}
+        {% endblock %}
       </div>
       <div class="span6 col2">
-				{% set organizations = h.get_featured_organizations(count=2) %}
-
-					<div class="box">
-						{% snippet 'snippets/organization_item_home.html', organization=organizations[1], truncate=50, truncate_title=35 %}
-					</div>
+        {% snippet 'home/snippets/featured_organization.html' %}
       </div>
     </div>
   </div>
