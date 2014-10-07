@@ -5,7 +5,6 @@
     ckan.site_title = NRRC
     ckan.site_logo = /base/images/nrrc-logo.png
     ckan.favicon = /images/icons/arizona.ico
-    ckan.featured_orgs = documents notifications
     
     ckan.auth.create_unowned_dataset = false
     ckan.auth.create_dataset_if_not_in_organization = false
