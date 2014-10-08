@@ -31,9 +31,10 @@ class NRRCClient(p.SingletonPlugin, tk.DefaultDatasetForm):
 
     def dataset_facets(self, facets_dict, package_type):
         facets_dict = OrderedDict()
-        #facets_dict['organization'] = _('Organizations')
-        #facets_dict['groups'] = _('Groups')
         facets_dict['tags'] = _('Tags')
+        facets_dict['organization'] = _('Organizations')
+        facets_dict['groups'] = _('Groups')
+        facets_dict['format'] = _('Formats')
         return facets_dict
 
     def get_helpers(self):
