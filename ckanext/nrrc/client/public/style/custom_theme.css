@@ -1,0 +1,78 @@
+
+/* The "account masthead" bar across the top of the site */
+.account-masthead {
+    background-color: #195594;
+}
+/* The "bubble" containing the number of new notifications. */
+.account-masthead .account .notifications a span {
+  background-color: #195594;
+}
+.account-masthead .account ul li {
+  border-left: none;
+}
+/* The text and icons in the user account info. */
+.account-masthead .account ul li a {
+  color: #2897d7;
+}
+/* The user account info text and icons, when the user's pointer is hovering
+   over them. */
+.account-masthead .account ul li a:hover {
+  color: #1473d7;
+  background-color: #195594;
+}
+.masthead {
+  background:  #195594;
+}
+/* The "navigation pills" in the masthead (the links to Datasets,
+   Organizations, etc) when the user's pointer hovers over them. */
+.masthead .navigation .nav-pills li a:hover {
+  background-color: #2897d7;
+  color: white;
+}
+/* The "active" navigation pill (for example, when you're on the /dataset page
+   the "Datasets" link is active). */
+.masthead .navigation .nav-pills li.active a {
+  background-color: #2897d7;
+}
+/* Change the colors of the "Search Your Data" box. */
+.homepage .module-search .module-content {
+  color: white;
+  background-color: #195594;
+}
+/* Change the background color of the "Popular Tags" box. */
+.homepage .module-search .tags {
+  background-color: #195594;
+}
+.site-footer,
+body {
+  background-color: #195594;
+}
+.btn-primary {
+  background-color: #195594;
+  background-image: -moz-linear-gradient(top, #2897d7, #195594);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2897d7), to(#195594));
+  background-image: -webkit-linear-gradient(top, #2897d7, #195594);
+  background-image: -o-linear-gradient(top, #2897d7, #195594);
+  background-image: linear-gradient(to bottom, #2897d7, #195594);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2897d7', endColorstr='#195594', GradientType=0);
+  border-color: #195594 #195594 #195594;
+  *background-color: #195594;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary.disabled,
+.btn-primary[disabled] {
+  color: #ffffff;
+  background-color: #195594;
+  *background-color: #195594;
+}
+a {
+ color: #195594;
+}
+a:hover,
+a:focus {
+ color: #2897d7;
+}
